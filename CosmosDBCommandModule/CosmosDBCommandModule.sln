@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmosDBCommandModule.Server", "CosmosDBCommandModule.Server\CosmosDBCommandModule.Server.csproj", "{E77AD6CB-7D51-4BEA-B7B4-973C93859740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmosDBCommandModule.Client", "CosmosDBCommandModule.Client\CosmosDBCommandModule.Client.csproj", "{4315F8A7-DAFA-4796-9D38-62CD086C3AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmosDBCommandModule.Shared", "CosmosDBCommandModule.Shared\CosmosDBCommandModule.Shared.csproj", "{4AC14B58-BB81-4752-903C-90BB93262422}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E77AD6CB-7D51-4BEA-B7B4-973C93859740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E77AD6CB-7D51-4BEA-B7B4-973C93859740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E77AD6CB-7D51-4BEA-B7B4-973C93859740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E77AD6CB-7D51-4BEA-B7B4-973C93859740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4315F8A7-DAFA-4796-9D38-62CD086C3AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4315F8A7-DAFA-4796-9D38-62CD086C3AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4315F8A7-DAFA-4796-9D38-62CD086C3AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4315F8A7-DAFA-4796-9D38-62CD086C3AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC14B58-BB81-4752-903C-90BB93262422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC14B58-BB81-4752-903C-90BB93262422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC14B58-BB81-4752-903C-90BB93262422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC14B58-BB81-4752-903C-90BB93262422}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5ED6F6C0-AD87-42AB-AEEA-90CE3A7F594B}
+	EndGlobalSection
+EndGlobal
