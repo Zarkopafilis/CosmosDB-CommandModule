@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Cosmonaut" Version="2.4.2" />
+    <PackageReference Include="Cosmonaut.Extensions.Microsoft.DependencyInjection" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />

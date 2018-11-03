@@ -1,5 +1,25 @@
 ﻿@page "/collectionscaler"
+@using CosmosDBCommandModule.Shared.Models
+@inject HttpClient Http
 
 <h1>Collection scaler</h1>
 
-Scaler!
+@if (_cosmosDatabases != null)
+{
+    foreach (var cosmosDatabase in _cosmosDatabases)
+    {
+        <div>@cosmosDatabase.Id</div>
+    }
+}
+
+@functions
+{
+private List<CosmosDatabase> _cosmosDatabases;
+
+
+protected override async Task OnInitAsync()
+{
+    _cosmosDatabases = await Http.GetJsonAsync<List<CosmosDatabase>>($"api/databases");
+}
+
+}

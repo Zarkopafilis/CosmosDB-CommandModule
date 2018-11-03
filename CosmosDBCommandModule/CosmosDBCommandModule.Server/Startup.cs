@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Net.Mime;
+using AutoMapper;
+using Cosmonaut;
+using Microsoft.Azure.Documents.Client;
 
 namespace CosmosDBCommandModule.Server
 {
@@ -25,6 +28,11 @@ namespace CosmosDBCommandModule.Server
                     WasmMediaTypeNames.Application.Wasm,
                 });
             });
+
+            //TODO: Make this something to be configured on web app level
+            services.AddSingleton<ICosmonautClient>(x=> new CosmonautClient("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==", new ConnectionPolicy{ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp}));
+
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
