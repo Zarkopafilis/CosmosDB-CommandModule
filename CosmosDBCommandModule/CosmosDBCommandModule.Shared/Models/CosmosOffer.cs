@@ -1,9 +1,9 @@
 ﻿namespace CosmosDBCommandModule.Shared.Models
 {
-    public class CosmosCollection
+    public class CosmosOffer
     {
         public string Id { get; set; }
 
-        public CosmosOffer Offer { get; set; }
+        public int Throughput { get; set; }
     }
 }

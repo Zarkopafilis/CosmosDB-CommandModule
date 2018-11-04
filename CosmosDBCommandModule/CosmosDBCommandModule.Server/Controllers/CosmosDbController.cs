@@ -22,11 +22,23 @@ namespace CosmosDBCommandModule.Server.Controllers
         }
 
         [HttpGet("databases")]
-        public async Task<IEnumerable<CosmosDatabase>> GetDatabases()
+        public async Task<IEnumerable<CosmosDatabase>> GetDatabases([FromQuery] bool withCollections = false)
         {
             var databases = await _cosmonautClient.QueryDatabasesAsync();
 
-            return _mapper.Map<IEnumerable<CosmosDatabase>>(databases);
+            var cosmosDatabases = _mapper.Map<List<CosmosDatabase>>(databases);
+
+            if (withCollections)
+            {
+                foreach (var database in databases)
+                {
+                    var collections = await _cosmonautClient.QueryCollectionsAsync(database.Id);
+                    var cosmosCollections = _mapper.Map<IEnumerable<CosmosCollection>>(collections);
+                    cosmosDatabases.Single(x => x.Id == database.Id).Collections = cosmosCollections;
+                }
+            }
+
+            return cosmosDatabases;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace CosmosDBCommandModule.Server.Mapping
         {
             CreateMap<DocumentCollection, CosmosCollection>();
             CreateMap<Database, CosmosDatabase>();
+            CreateMap<OfferV2, CosmosOffer>();
         }
     }
 }
