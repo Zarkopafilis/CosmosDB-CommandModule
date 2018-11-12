@@ -22,7 +22,7 @@ namespace CosmosDBCommandModule.Server.Controllers
         }
 
         [HttpGet("databases")]
-        public async Task<IEnumerable<CosmosDatabase>> GetDatabases([FromQuery] bool withCollections = false)
+        public async Task<IEnumerable<CosmosDatabase>> GetDatabases([FromQuery] bool withCollections = false, [FromQuery] bool withOffers = false)
         {
             var databases = await _cosmonautClient.QueryDatabasesAsync();
 
@@ -33,8 +33,19 @@ namespace CosmosDBCommandModule.Server.Controllers
                 foreach (var database in databases)
                 {
                     var collections = await _cosmonautClient.QueryCollectionsAsync(database.Id);
-                    var cosmosCollections = _mapper.Map<IEnumerable<CosmosCollection>>(collections);
+                    var cosmosCollections = _mapper.Map<IEnumerable<CosmosCollection>>(collections).ToList();
                     cosmosDatabases.Single(x => x.Id == database.Id).Collections = cosmosCollections;
+
+                    if (withOffers)
+                    {
+                        foreach (var collection in cosmosCollections)
+                        {
+                            var offer = await _cosmonautClient.GetOfferV2ForCollectionAsync(database.Id, collection.Id);
+
+                            collection.Offer = new CosmosOffer
+                                {Id = offer.Id, Throughput = offer.Content.OfferThroughput};
+                        }
+                    }
                 }
             }
 

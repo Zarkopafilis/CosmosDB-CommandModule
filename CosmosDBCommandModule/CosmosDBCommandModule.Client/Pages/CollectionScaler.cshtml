@@ -14,7 +14,7 @@
         {
             foreach (var cosmosCollection in cosmosDatabase.Collections)
             {
-                <div>Collection: @cosmosCollection.Id</div>
+                <div>Collection with id @cosmosCollection.Id and throughput @cosmosCollection.Offer.Throughput RU/s</div>
             }
         }
     }
@@ -27,7 +27,7 @@ private List<CosmosDatabase> _cosmosDatabases;
 
 protected override async Task OnInitAsync()
 {
-    _cosmosDatabases = await Http.GetJsonAsync<List<CosmosDatabase>>($"api/databases?withCollections=true");
+    _cosmosDatabases = await Http.GetJsonAsync<List<CosmosDatabase>>($"api/databases?withCollections=true&withOffers=true");
 }
 
 }
