@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Cosmonaut;
 using CosmosDBCommandModule.Shared.Models;
+using Microsoft.Azure.Documents;
 
 namespace CosmosDBCommandModule.Server.Controllers
 {
@@ -50,6 +52,22 @@ namespace CosmosDBCommandModule.Server.Controllers
             }
 
             return cosmosDatabases;
+        }
+
+        [HttpPost("databases/{databaseId}/collections/{collectionId}/throughput/{throughput}")]
+        public async Task<ActionResponse> UpdateThroughput(string databaseId, string collectionId, int throughput)
+        {
+            var offer = await _cosmonautClient.GetOfferV2ForCollectionAsync(databaseId, collectionId);
+
+            var newOffer = new OfferV2(offer, throughput);
+            var result = await _cosmonautClient.UpdateOfferAsync(newOffer);
+            var success = result.StatusCode == HttpStatusCode.OK;
+
+            return new ActionResponse
+            {
+                Success = success,
+                Message = success ? "Success" : "Failed"
+            };
         }
     }
 }
