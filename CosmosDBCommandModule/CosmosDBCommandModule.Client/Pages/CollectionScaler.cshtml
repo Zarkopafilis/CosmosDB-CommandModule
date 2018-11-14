@@ -6,28 +6,79 @@
 
 @if (_cosmosDatabases != null)
 {
-    foreach (var cosmosDatabase in _cosmosDatabases)
+    @foreach (var cosmosDatabase in _cosmosDatabases)
     {
-        <div>Database: @cosmosDatabase.Id</div>
+        <div id="accordion-@cosmosDatabase.Id">
+            <div class="card">
 
-        if (cosmosDatabase.Collections != null)
-        {
-            foreach (var cosmosCollection in cosmosDatabase.Collections)
+        <!--Title-->
+        <div class="card-header" id="heading-@cosmosDatabase.Id">
+            <h5 class="btn btn-secondary mb-0" data-toggle="collapse" data-target="#collapse-@cosmosDatabase.Id"
+                aria-expanded="true" 
+                aria-controls="collapse-@cosmosDatabase.Id">
+                <i class="fas fa-database"></i>Database @cosmosDatabase.Id
+            </h5>
+        </div>
+
+        <!-- Collapsable Part (List of Collections) -->
+        <div id="collapse-@cosmosDatabase.Id" class="collapse show" 
+             aria-labelledby="heading-@cosmosDatabase.Id" data-parent="#accordion-@cosmosDatabase.Id">
+            @if (cosmosDatabase.Collections != null)
             {
-                <div>Collection with id @cosmosCollection.Id and throughput @cosmosCollection.Offer.Throughput RU/s</div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var cosmosCollection in cosmosDatabase.Collections)
+                    {
+                        <li class="list-group-item">
+                            <div class="row">
+                                <h4><span class="badge badge-info align-self-center ml-5"><i class="fas fa-file-alt"></i>@cosmosCollection.Id</span></h4>
+                                <h4 class="align-self-center ml-1">Throughput @cosmosCollection.Offer RU/s</h4>
+                                <button type="button" class="btn btn-link ml-1">Edit</button>
+                            </div>
+                        </li>
+                    }
+                </ul>
             }
-        }
+            else
+            {
+                <div class="card-body">
+                    <div class="ml-5">
+                        <h5 class="card-title">No Collections</h5>
+                        <p class="card-text">Add some and check back</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
     }
+}
+
+@if (_loading)
+{
+    <div style="display: inline-block;" class="alert alert-info" role="alert">
+        Loading databases...
+    </div>
+}
+
+@if (_cosmosDatabases!= null && _cosmosDatabases.Count == 0)
+{
+    <div style="display: inline-block;" class="alert alert-warning" role="alert">
+        No databases detected.
+    </div>
 }
 
 @functions
 {
-private List<CosmosDatabase> _cosmosDatabases;
 
+private List<CosmosDatabase> _cosmosDatabases;
+private bool _loading = true;
 
 protected override async Task OnInitAsync()
 {
     _cosmosDatabases = await Http.GetJsonAsync<List<CosmosDatabase>>($"api/databases?withCollections=true&withOffers=true");
+    _loading = false;
+    this.StateHasChanged();
 }
 
 }
