@@ -15,7 +15,8 @@
                     <h5 class="btn btn-secondary mb-0" data-toggle="collapse" data-target="#collapse-@cosmosDatabase.Id"
                         aria-expanded="true"
                         aria-controls="collapse-@cosmosDatabase.Id">
-                        <i class="fas fa-database"></i> @cosmosDatabase.Id
+                        <i class="fas fa-database mr-1"></i> 
+                        @cosmosDatabase.Id
                     </h5>
                 </div>
 
@@ -27,11 +28,31 @@
                             @foreach (var cosmosCollection in cosmosDatabase.Collections)
                             {
                                 <li class="list-group-item">
-                                    <div class="row">
-                                        <h4><span class="badge badge-info align-self-center ml-5"><i class="fas fa-file-alt"></i> @cosmosCollection.Id</span></h4>
-                                        <h4 class="align-self-center ml-1">Throughput @cosmosCollection.Offer.Throughput RU/s</h4>
-                                        <button type="button" class="btn btn-link ml-1">Edit</button>
-                                    </div>
+                                    <div id="accordion-@cosmosDatabase.Id-@cosmosCollection.Id">
+                                        <div class="card">
+                                            <div class="card-header" id="heading-@cosmosDatabase.Id-@cosmosCollection.Id">
+                                                <h5 class="btn btn-link" data-toggle="collapse" data-target="#collapse-@cosmosDatabase.Id-@cosmosCollection.Id"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapse-@cosmosDatabase.Id-@cosmosCollection.Id">
+                                                    <span class="btn btn-info align-self-center"><i class="fas fa-file-alt mr-1"></i>
+                                                    @cosmosCollection.Id</span>                                                
+                                                </h5>
+                                            </div>
+
+                                            <div id="collapse-@cosmosDatabase.Id-@cosmosCollection.Id" class="collapse show"
+                                                 aria-labelledby="heading--@cosmosDatabase.Id-@cosmosCollection.Id"
+                                                 data-parent="#accordion--@cosmosDatabase.Id-@cosmosCollection.Id">
+
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <h5 class="ml-2 align-self-center">Throughput @cosmosCollection.Offer.Throughput RU/s</h5>
+                                                        <button type="button" class="btn btn-link ml-1">Edit</button>
+                                                    </div>
+                                                </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                 </li>
                             }
                         </ul>
