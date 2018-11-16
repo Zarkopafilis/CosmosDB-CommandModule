@@ -8,67 +8,7 @@
 {
     foreach (var cosmosDatabase in _cosmosDatabases)
     {
-        <div id="accordion-@cosmosDatabase.Id">
-            <div class="card">
-
-                <div class="card-header" id="heading-@cosmosDatabase.Id">
-                    <h5 class="btn btn-secondary mb-0" data-toggle="collapse" data-target="#collapse-@cosmosDatabase.Id"
-                        aria-expanded="true"
-                        aria-controls="collapse-@cosmosDatabase.Id">
-                        <i class="fas fa-database mr-1"></i> 
-                        @cosmosDatabase.Id
-                    </h5>
-                </div>
-
-                <div id="collapse-@cosmosDatabase.Id" class="collapse show"
-                     aria-labelledby="heading-@cosmosDatabase.Id" data-parent="#accordion-@cosmosDatabase.Id">
-                    @if (cosmosDatabase.Collections != null)
-                    {
-                        <ul class="list-group list-group-flush">
-                            @foreach (var cosmosCollection in cosmosDatabase.Collections)
-                            {
-                                <li class="list-group-item">
-                                    <div id="accordion-@cosmosDatabase.Id-@cosmosCollection.Id">
-                                        <div class="card">
-                                            <div class="card-header" id="heading-@cosmosDatabase.Id-@cosmosCollection.Id">
-                                                <h5 class="btn btn-link" data-toggle="collapse" data-target="#collapse-@cosmosDatabase.Id-@cosmosCollection.Id"
-                                                    aria-expanded="true"
-                                                    aria-controls="collapse-@cosmosDatabase.Id-@cosmosCollection.Id">
-                                                    <span class="btn btn-info align-self-center"><i class="fas fa-file-alt mr-1"></i>
-                                                    @cosmosCollection.Id</span>                                                
-                                                </h5>
-                                            </div>
-
-                                            <div id="collapse-@cosmosDatabase.Id-@cosmosCollection.Id" class="collapse show"
-                                                 aria-labelledby="heading--@cosmosDatabase.Id-@cosmosCollection.Id"
-                                                 data-parent="#accordion--@cosmosDatabase.Id-@cosmosCollection.Id">
-
-                                                <div class="col-md-12">
-                                                    <div class="row">
-                                                        <h5 class="ml-2 align-self-center">Throughput @cosmosCollection.Offer.Throughput RU/s</h5>
-                                                        <button type="button" class="btn btn-link ml-1">Edit</button>
-                                                    </div>
-                                                </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                </li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <div class="card-body">
-                            <div class="ml-5">
-                                <h5 class="card-title">No Collections</h5>
-                                <p class="card-text">Add some and check back</p>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
+        <DatabaseScalerCard CosmosDatabase=@cosmosDatabase></DatabaseScalerCard>
     }
 }
 
@@ -79,7 +19,7 @@
     </div>
 }
 
-@if (_cosmosDatabases!= null && _cosmosDatabases.Count == 0)
+@if (_cosmosDatabases != null && _cosmosDatabases.Count == 0)
 {
     <div style="display: inline-block;" class="alert alert-warning" role="alert">
         No databases detected.

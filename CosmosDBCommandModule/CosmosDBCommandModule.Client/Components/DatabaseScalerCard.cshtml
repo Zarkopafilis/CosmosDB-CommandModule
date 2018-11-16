@@ -1,0 +1,34 @@
+﻿@using CosmosDBCommandModule.Shared.Models
+
+<CollapsableCard Id=@CosmosDatabase.Id>
+    <HeaderFragment>
+        <i class="fas fa-database mr-1"></i>
+        @CosmosDatabase.Id
+    </HeaderFragment>
+
+    <BodyFragment>
+        @if (CosmosDatabase.Collections != null)
+        {
+            <ul class="list-group list-group-flush">
+                @foreach (var cosmosCollection in CosmosDatabase.Collections)
+                {
+                <li class="list-group-item">
+                    <CollectionScalerCard CosmosCollection=@cosmosCollection DatabaseId=@CosmosDatabase.Id></CollectionScalerCard>
+                </li>
+                }
+            </ul>
+        }
+        else if (CosmosDatabase.Collections == null || CosmosDatabase.Collections.Count() == 0)
+        {
+            <div class="ml-5">
+                <h5 class="card-title">No Collections</h5>
+                <p class="card-text">Add some and check back</p>
+            </div>
+        }
+    </BodyFragment>
+</CollapsableCard>
+
+@functions{
+    [Parameter]
+    private CosmosDatabase CosmosDatabase { get; set; }
+}

@@ -1,0 +1,27 @@
+﻿@using CosmosDBCommandModule.Shared.Models
+
+<CollapsableCard Id=@(DatabaseId + "-" + CosmosCollection.Id)>
+    <HeaderFragment>
+        <span class="btn btn-info">
+            <i class="fas fa-file-alt mr-1"></i>
+            @CosmosCollection.Id
+        </span>
+    </HeaderFragment>
+
+    <BodyFragment>
+        <div class="col-md-12">
+            <div class="row">
+                <h5 class="ml-2 align-self-center">Throughput @CosmosCollection.Offer.Throughput RU/s</h5>
+                <button type="button" class="btn btn-link ml-1">Edit</button>
+            </div>
+        </div>
+    </BodyFragment>
+</CollapsableCard>
+
+@functions{
+    [Parameter]
+    private CosmosCollection CosmosCollection { get; set; }
+
+    [Parameter]
+    private string DatabaseId { get; set; }
+}

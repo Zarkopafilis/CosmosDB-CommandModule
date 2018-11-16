@@ -1,0 +1,32 @@
+﻿<div id="accordion-@Id">
+    <div class="card">
+        <div class="card-header" id="heading-@Id">
+            <h5 class="btn btn-link" data-toggle="collapse" data-target="#collapse-@Id"
+                aria-expanded="true"
+                aria-controls="collapse-@Id">
+                
+                @HeaderFragment
+
+            </h5>
+        </div>
+
+        <div id="collapse-@Id" class="collapse show"
+             aria-labelledby="heading-@Id"
+             data-parent="#accordion-@Id">
+
+            @BodyFragment
+
+        </div>
+    </div>
+</div>
+
+@functions{
+    [Parameter]
+    private RenderFragment HeaderFragment { get; set; }
+
+    [Parameter]
+    private RenderFragment BodyFragment { get; set; }
+
+    [Parameter]
+    private string Id { get; set; }
+}
